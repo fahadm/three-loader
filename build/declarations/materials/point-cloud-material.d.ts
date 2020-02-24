@@ -1,4 +1,4 @@
-import { BufferGeometry, Camera, Color, Geometry, Material, RawShaderMaterial, Scene, Texture, WebGLRenderer } from 'three';
+import { BufferGeometry, Camera, Color, Geometry, Material, RawShaderMaterial, Scene, Texture, Vector3, Vector4, WebGLRenderer } from 'three';
 import { PointCloudOctree } from '../point-cloud-octree';
 import { PointCloudOctreeNode } from '../point-cloud-octree-node';
 import { ClipMode, IClipBox } from './clipping';
@@ -53,6 +53,8 @@ export interface IPointCloudMaterialUniforms {
     wSourceID: IUniform<number>;
     opacityAttenuation: IUniform<number>;
     filterByNormalThreshold: IUniform<number>;
+    highlightedPointCoordinate: IUniform<Vector3>;
+    highlightedPointColor: IUniform<Vector4>;
 }
 export declare class PointCloudMaterial extends RawShaderMaterial {
     private static helperVec3;
@@ -97,6 +99,8 @@ export declare class PointCloudMaterial extends RawShaderMaterial {
     weightSourceID: number;
     opacityAttenuation: number;
     filterByNormalThreshold: number;
+    highlightedPointCoordinate: Vector3;
+    highlightedPointColor: Vector4;
     useClipBox: boolean;
     weighted: boolean;
     pointColorType: PointColorType;
@@ -107,6 +111,7 @@ export declare class PointCloudMaterial extends RawShaderMaterial {
     treeType: TreeType;
     pointOpacityType: PointOpacityType;
     useFilterByNormal: boolean;
+    highlightPoint: boolean;
     attributes: {
         position: {
             type: string;
