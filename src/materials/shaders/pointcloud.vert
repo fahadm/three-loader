@@ -68,6 +68,7 @@ uniform sampler2D depthMap;
 
 #ifdef highlight_point
 	uniform vec3 highlightedPointCoordinate;
+	uniform bool enablePointHighlighting;
 #endif
 
 varying vec3 vColor;
@@ -428,7 +429,7 @@ void main() {
 
 	#ifdef highlight_point
 		vec4 mPosition = modelMatrix * vec4(position, 1.0);
-		if (abs(mPosition.x - highlightedPointCoordinate.x) < 0.0001 &&
+		if (enablePointHighlighting && abs(mPosition.x - highlightedPointCoordinate.x) < 0.0001 &&
 			abs(mPosition.y - highlightedPointCoordinate.y) < 0.0001 &&
 			abs(mPosition.z - highlightedPointCoordinate.z) < 0.0001) {
 			vHighlight = 1.0;

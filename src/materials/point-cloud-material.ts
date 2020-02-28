@@ -93,6 +93,7 @@ export interface IPointCloudMaterialUniforms {
   filterByNormalThreshold: IUniform<number>;
   highlightedPointCoordinate: IUniform<Vector3>;
   highlightedPointColor: IUniform<Vector4>;
+  enablePointHighlighting: IUniform<boolean>;
 }
 
 const TREE_TYPE_DEFS = {
@@ -205,6 +206,7 @@ export class PointCloudMaterial extends RawShaderMaterial {
     filterByNormalThreshold: makeUniform('f', 0),
     highlightedPointCoordinate: makeUniform('fv', new Vector3()),
     highlightedPointColor: makeUniform('fv', DEFAULT_HIGHLIGHT_COLOR.clone()),
+    enablePointHighlighting: makeUniform('b', true),
   };
 
   @uniform('bbSize') bbSize!: [number, number, number];
@@ -239,6 +241,7 @@ export class PointCloudMaterial extends RawShaderMaterial {
   @uniform('filterByNormalThreshold') filterByNormalThreshold!: number;
   @uniform('highlightedPointCoordinate') highlightedPointCoordinate!: Vector3;
   @uniform('highlightedPointColor') highlightedPointColor!: Vector4;
+  @uniform('enablePointHighlighting') enablePointHighlighting!: boolean;
 
   @requiresShaderUpdate() useClipBox: boolean = false;
   @requiresShaderUpdate() weighted: boolean = false;

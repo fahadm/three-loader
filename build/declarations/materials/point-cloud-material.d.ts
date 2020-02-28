@@ -55,6 +55,7 @@ export interface IPointCloudMaterialUniforms {
     filterByNormalThreshold: IUniform<number>;
     highlightedPointCoordinate: IUniform<Vector3>;
     highlightedPointColor: IUniform<Vector4>;
+    enablePointHighlighting: IUniform<boolean>;
 }
 export declare class PointCloudMaterial extends RawShaderMaterial {
     private static helperVec3;
@@ -101,6 +102,7 @@ export declare class PointCloudMaterial extends RawShaderMaterial {
     filterByNormalThreshold: number;
     highlightedPointCoordinate: Vector3;
     highlightedPointColor: Vector4;
+    enablePointHighlighting: boolean;
     useClipBox: boolean;
     weighted: boolean;
     pointColorType: PointColorType;
@@ -164,5 +166,5 @@ export declare class PointCloudMaterial extends RawShaderMaterial {
     setUniform<K extends keyof IPointCloudMaterialUniforms>(name: K, value: IPointCloudMaterialUniforms[K]['value']): void;
     updateMaterial(octree: PointCloudOctree, visibleNodes: PointCloudOctreeNode[], camera: Camera, renderer: WebGLRenderer): void;
     private updateVisibilityTextureData;
-    static makeOnBeforeRender(octree: PointCloudOctree, node: PointCloudOctreeNode, pcIndex?: number): (_renderer: WebGLRenderer, _scene: Scene, _camera: Camera, _geometry: Geometry | BufferGeometry, material: Material) => void;
+    static makeOnBeforeRender(octree: PointCloudOctree, node: PointCloudOctreeNode, pcIndex?: number): (_renderer: WebGLRenderer, _scene: Scene, _camera: Camera, _geometry: BufferGeometry | Geometry, material: Material) => void;
 }
